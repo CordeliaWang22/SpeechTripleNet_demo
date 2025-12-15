@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>语音编辑演示 - Speech Editing Demo</title>
+    <title>Speech Editing Demo</title>
     <style>
         * {
             margin: 0;
@@ -157,149 +157,141 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎙️ 语音编辑演示</h1>
+        <h1>🎧 Speech Editing Demo</h1>
         <div class="subtitle">Speech Editing with Disentangled Representation</div>
 
-        <!-- 原始音频 -->
+        <!-- Original Audio -->
         <div class="category">
-            <div class="category-title">📌 原始音频</div>
+            <div class="category-title">Original Audio</div>
             
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🎵</span>
-                    原始语音
+                    Original Speech
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Original</span>
-                    未经任何处理的原始录音
+                    Unprocessed original recording
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/01_original.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Your browser does not support audio playback
                 </audio>
             </div>
 
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">👤</span>
-                    参考说话人
+                    Reference Speaker
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Reference</span>
-                    用于音色转换的目标说话人音频
+                    Target speaker audio for timbre conversion
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/02_speaker_reference.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser. 
                 </audio>
             </div>
 
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🔄</span>
-                    重建语音
+                    Reconstructed Speech
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Reconstruction</span>
-                    通过模型重建的语音，验证模型质量
+                    Speech reconstructed by the model to verify quality
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/03_reconstructed.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
         </div>
 
-        <!-- 单一编辑 -->
+        <!-- Single Attribute Editing -->
         <div class="category">
-            <div class="category-title">🎨 单一属性编辑</div>
+            <div class="category-title">Single Attribute Editing</div>
             
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🎭</span>
-                    音色编辑
+                    Timbre Editing
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Timbre</span>
-                    改变说话人音色，内容和韵律保持不变
+                    Change speaker timbre while keeping content and prosody
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/04_timbre_edited.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
 
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🎹</span>
-                    音高编辑
+                    Pitch Editing
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Pitch</span>
-                    提高最后一个词("farmer")的音高
+                    Increase pitch of the last word ("farmer")
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/05_pitch_edited.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
 
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🔊</span>
-                    能量编辑
+                    Energy Editing
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Energy</span>
-                    增强最后一个词的音量能量
+                    Enhance volume energy of the last word
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/06_energy_edited.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
         </div>
 
-        <!-- 组合编辑 -->
+        <!-- Combined Editing -->
         <div class="category">
-            <div class="category-title">✨ 组合编辑</div>
+            <div class="category-title">Combined Editing</div>
             
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🎼</span>
-                    音高 + 能量
+                    Pitch + Energy
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Pitch</span>
                     <span class="tag">Energy</span>
-                    同时修改音高和能量
+                    Modify both pitch and energy simultaneously
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/07_pitch_energy_edited.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
 
             <div class="audio-card">
                 <div class="audio-title">
-                    <span class="icon">🌟</span>
-                    全部编辑
+                    All Editing
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Timbre</span>
                     <span class="tag">Pitch</span>
                     <span class="tag">Energy</span>
-                    同时修改音色、音高和能量
+                    Modify timbre, pitch, and energy simultaneously
                 </div>
                 <audio controls preload="metadata">
                     <source src="audio_samples/08_all_edited.wav" type="audio/wav">
-                    您的浏览器不支持音频播放
+                    Audio playback is not supported in your browser.
                 </audio>
             </div>
         </div>
 
         <div class="footer">
-            💡 建议使用耳机获得更好的听觉体验<br>
+            💡 Headphones recommended for better listening experience<br>
             🔬 Based on Disentangled Speech Representation
         </div>
     </div>
@@ -320,7 +312,7 @@
                     console.error('Audio load error:', audio.src);
                     audio.parentElement.style.opacity = '0.5';
                     const desc = audio.previousElementSibling;
-                    desc.innerHTML += '<br><span style="color: red; font-size: 12px;">⚠️ 音频文件加载失败</span>';
+                    desc.innerHTML += '<br><span style="color: red; font-size: 12px;">⚠️ Audio file failed to load.</span>';
                 });
             });
         });
