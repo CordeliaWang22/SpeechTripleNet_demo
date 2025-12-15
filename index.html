@@ -158,7 +158,7 @@
 <body>
     <div class="container">
         <h1>🎧 Speech Editing Demo</h1>
-        <div class="subtitle">Speech Editing with Disentangled Representation</div>
+        <div class="subtitle">Speech Editing with Disentangled Representation Learning</div>
 
         <!-- Original Audio -->
         <div class="category">
@@ -204,12 +204,15 @@
                     <source src="audio_samples/03_reconstructed.wav" type="audio/wav">
                     Audio playback is not supported in your browser.
                 </audio>
+                <img src="audio_samples/reconstructed_speech.png" 
+                     alt="Reconstructed Speech Visualization" 
+                     style="width: 100%; border-radius: 10px; margin-top: 15px;">
             </div>
         </div>
 
-        <!-- Single Attribute Editing -->
+        <!-- Speech Editing -->
         <div class="category">
-            <div class="category-title">Single Attribute Editing</div>
+            <div class="category-title">Speech Editing</div>
             
             <div class="audio-card">
                 <div class="audio-title">
@@ -252,11 +255,6 @@
                     Audio playback is not supported in your browser.
                 </audio>
             </div>
-        </div>
-
-        <!-- Combined Editing -->
-        <div class="category">
-            <div class="category-title">Combined Editing</div>
             
             <div class="audio-card">
                 <div class="audio-title">
@@ -288,14 +286,11 @@
                     Audio playback is not supported in your browser.
                 </audio>
             </div>
-        </div>
-
-         <!-- Comparison Figure -->
-        <div class="category">
-            <div class="category-title">Visual Comparison</div>
+    
+            <!-- Editing Comparison Visualization -->
             <div class="audio-card">
                 <div class="audio-title">
-                    Speech Editing Comparison
+                    Editing Comparison
                 </div>
                 <div class="audio-desc">
                     <span class="tag">Visualization</span>
@@ -336,4 +331,5 @@
     </script>
 </body>
 </html>
+
 
