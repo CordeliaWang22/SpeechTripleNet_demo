@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>语音编辑演示 - Speech Editing Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .audio-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .audio-card:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .audio-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .audio-title .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .audio-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+            border-radius: 25px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: linear-gradient(to right, #667eea, #764ba2);
+        }
+
+        .category {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #764ba2;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        /* 加载动画 */
+        .loading {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .loading:after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .audio-card {
+                padding: 15px;
+            }
+            .audio-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ 语音编辑演示</h1>
+        <div class="subtitle">Speech Editing with Disentangled Representation</div>
+
+        <!-- 原始音频 -->
+        <div class="category">
+            <div class="category-title">📌 原始音频</div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🎵</span>
+                    原始语音
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Original</span>
+                    未经任何处理的原始录音
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/01_original.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">👤</span>
+                    参考说话人
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Reference</span>
+                    用于音色转换的目标说话人音频
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/02_speaker_reference.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🔄</span>
+                    重建语音
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Reconstruction</span>
+                    通过模型重建的语音，验证模型质量
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/03_reconstructed.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+        </div>
+
+        <!-- 单一编辑 -->
+        <div class="category">
+            <div class="category-title">🎨 单一属性编辑</div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🎭</span>
+                    音色编辑
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Timbre</span>
+                    改变说话人音色，内容和韵律保持不变
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/04_timbre_edited.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🎹</span>
+                    音高编辑
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Pitch</span>
+                    提高最后一个词("farmer")的音高
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/05_pitch_edited.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🔊</span>
+                    能量编辑
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Energy</span>
+                    增强最后一个词的音量能量
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/06_energy_edited.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+        </div>
+
+        <!-- 组合编辑 -->
+        <div class="category">
+            <div class="category-title">✨ 组合编辑</div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🎼</span>
+                    音高 + 能量
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Pitch</span>
+                    <span class="tag">Energy</span>
+                    同时修改音高和能量
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/07_pitch_energy_edited.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-title">
+                    <span class="icon">🌟</span>
+                    全部编辑
+                </div>
+                <div class="audio-desc">
+                    <span class="tag">Timbre</span>
+                    <span class="tag">Pitch</span>
+                    <span class="tag">Energy</span>
+                    同时修改音色、音高和能量
+                </div>
+                <audio controls preload="metadata">
+                    <source src="audio_samples/08_all_edited.wav" type="audio/wav">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+        </div>
+
+        <div class="footer">
+            💡 建议使用耳机获得更好的听觉体验<br>
+            🔬 Based on Disentangled Speech Representation
+        </div>
+    </div>
+
+    <script>
+        // 添加播放统计（可选）
+        document.querySelectorAll('audio').forEach((audio, index) => {
+            audio.addEventListener('play', () => {
+                console.log(`Playing audio ${index + 1}`);
+            });
+        });
+
+        // 检查音频文件是否可访问
+        window.addEventListener('load', () => {
+            const audios = document.querySelectorAll('audio');
+            audios.forEach(audio => {
+                audio.addEventListener('error', (e) => {
+                    console.error('Audio load error:', audio.src);
+                    audio.parentElement.style.opacity = '0.5';
+                    const desc = audio.previousElementSibling;
+                    desc.innerHTML += '<br><span style="color: red; font-size: 12px;">⚠️ 音频文件加载失败</span>';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
